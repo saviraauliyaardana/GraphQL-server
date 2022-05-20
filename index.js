@@ -141,7 +141,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "This delicious Crustless Spinach Quiche uses thinly sliced sweet potatoes instead of puff pastry as a base. The filling with eggs, spinach, and ricotta makes it extra creamy and flavorful. A must-have for your vegetarian recipes collection.",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2021/06/Crustless-Spinach-Quiche-2.jpg",
-		linkvid: "https://youtu.be/jdUJItIuo3A",
+		linkvid: "https://youtu.be/embed/jdUJItIuo3A",
 		prep: "10 minute",
 		cook: "30 Minute",
 		rat: 5,
@@ -154,7 +154,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "The Most Amazing Vegan Overnight Oats with Vanilla flavor and topped with an out-of-this-world Vegan Chocolate Peanut Butter Banana Smoothie! All the hearts in my eyes!",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2018/01/Vegan-Overnight-Oats-Image.jpg",
-		linkvid: "https://youtu.be/9-N7J22bN3k",
+		linkvid: "https://youtu.be/embed/9-N7J22bN3k",
 		prep: "8 minute",
 		cook: "10 Minute",
 		rat: 5,
@@ -180,7 +180,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "This hearty Beef Vegetable Soup will warm you up from the inside out. Chock full of veggies and lean ground beef, you will absolutely love it!",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2022/01/Beef-Vegetable-Soup-1000x1500.jpg",
-		linkvid: "https://youtu.be/6L5lxKB_ubU",
+		linkvid: "https://youtu.be/embed/6L5lxKB_ubU",
 		prep: "20 minute",
 		cook: "45 Minute",
 		rat: 5,
@@ -193,7 +193,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "This Peruvian Green Rice is hands down the best rice side dish ever! The fresh cilantro not only makes the rice green, but it's also extraordinarily nutritious and delicious.",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2016/09/Peruvian-Green-Rice-1000x1500.jpg",
-		linkvid: "https://youtu.be/MaX6T2nsL1g",
+		linkvid: "https://youtu.be/embed/MaX6T2nsL1g",
 		prep: "5 minute",
 		cook: "20 Minute",
 		rat: 4,
@@ -352,7 +352,7 @@ const gizi = [
 const step = [
 	{
 		id: 1,
-		ing: [
+		ingridient: [
 			"2 sweet potatoes",
 			"1 Tbsp avocado oil",
 			"2 shallots",
@@ -381,7 +381,7 @@ const step = [
 	},
 	{
 		id: 2,
-		ing: [
+		ingridient: [
 			"1 large onion",
 			"1 red pepper",
 			"2 garlic cloves",
@@ -420,7 +420,7 @@ const step = [
 	},
 	{
 		id: 3,
-		ing: [
+		ingridient: [
 			"1 lbs haddock fillet(s)",
 			"1 Tbsp butter",
 			"1 cup couscous",
@@ -444,7 +444,7 @@ const step = [
 	},
 	{
 		id: 4,
-		ing: [
+		ingridient: [
 			"1 yellow onion",
 			"2 cloves garlic",
 			"5 oz green beans",
@@ -474,7 +474,7 @@ const step = [
 	},
 	{
 		id: 5,
-		ing: [
+		ingridient: [
 			"1/2 bunch fresh cilantro",
 			"1-1.5 cups broth ",
 			"2 tsp avocado oil",
@@ -499,7 +499,7 @@ const step = [
 	},
 	{
 		id: 6,
-		ing: [
+		ingridient: [
 			"1 lbs Fingerling potatoes or baby or new or creamer",
 			"4 bone-in skin-on chicken thighs",
 			"5 oz green beans",
@@ -529,7 +529,7 @@ const step = [
 	},
 	{
 		id: 7,
-		ing: [
+		ingridient: [
 			"2 frozen bananas",
 			"1 cup hulled strawberries",
 			"1/2 cup coconut milk",
@@ -543,7 +543,7 @@ const step = [
 	},
 	{
 		id: 8,
-		ing: [
+		ingridient: [
 			"2 cups water",
 			"1/2 cup raw cacao powder",
 			"3.5 oz piloncillo/(100g)",
@@ -564,7 +564,7 @@ const step = [
 	},
 	{
 		id: 9,
-		ing: [
+		ingridient: [
 			"4 lbs chuck roast (or round)",
 			"cajun seasoning",
 			"1 cup roasted red bell peppers",
@@ -596,7 +596,7 @@ const step = [
 	},
 	{
 		id: 10,
-		ing: [
+		ingridient: [
 			"2 cups almond flour",
 			"2 Tbsp coconut oil",
 			"3-4 Tbsp maple syrup",
