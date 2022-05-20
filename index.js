@@ -29,7 +29,7 @@ const RecipeType = new GraphQLObjectType({
 		step: {
 			type: CaraType,
 			resolve: recipe => {
-				return cara.find(cara.id === recipe.id);
+				return step.find(step => step.id === recipe.id);
 			},
 		},
 		gizi: {
@@ -58,10 +58,28 @@ const CaraType = new GraphQLObjectType({
 	description: "Mau Lihat Gizi ?",
 	fields: () => ({
 		id: { type: GraphQLNonNull(GraphQLInt) },
-		step: { type: GraphQLString },
-		ing: { type: GraphQLString },
+		step: { type: GraphQLList(GraphQLString) },
+		ingridient: { type: GraphQLList(GraphQLString) },
 	}),
 });
+
+const ReviewType = new GraphQLObjectType({
+	name: "Review",
+	description: "Review ",
+	fields: () => ({
+		id: { type: GraphQLNonNull(GraphQLInt) },
+		nama: { type: GraphQLString },
+		rat: { type: GraphQLInt },
+		comment: { type: GraphQLString },
+		recipe: {
+			type: RecipeType,
+			resolve: review => {
+				return recipe.find(data => data.id === review.id);
+			},
+		},
+	}),
+});
+
 const RootQueryType = new GraphQLObjectType({
 	name: "Query",
 	description: "Root Query",
@@ -79,6 +97,11 @@ const RootQueryType = new GraphQLObjectType({
 			description: "List of All recipe",
 			resolve: () => recipe,
 		},
+		review: {
+			type: new GraphQLList(ReviewType),
+			description: "List of All Review",
+			resolve: () => review,
+		},
 	}),
 });
 const RootMutationType = new GraphQLObjectType({
@@ -89,7 +112,6 @@ const RootMutationType = new GraphQLObjectType({
 			type: RecipeType,
 			description: "Add a recipe",
 			args: {
-				id: { type: GraphQLNonNull(GraphQLInt) },
 				name: { type: GraphQLNonNull(GraphQLString) },
 				koki: { type: GraphQLNonNull(GraphQLString) },
 				ket: { type: GraphQLNonNull(GraphQLString) },
@@ -105,13 +127,13 @@ const RootMutationType = new GraphQLObjectType({
 					id: recipe.length + 1,
 					name: args.name,
 					koki: args.koki,
-					ket: args.koki,
-					foto: args.koki,
-					linkvid: args.koki,
-					prep: args.koki,
-					cook: args.koki,
-					gizi: args.koki,
-					step: args.koki,
+					ket: args.ket,
+					foto: args.foto,
+					linkvid: args.linkvid,
+					prep: args.prep,
+					cook: args.cook,
+					gizi: args.gizi,
+					step: args.step,
 				};
 				recipe.push(book);
 				return book;
@@ -141,7 +163,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "This delicious Crustless Spinach Quiche uses thinly sliced sweet potatoes instead of puff pastry as a base. The filling with eggs, spinach, and ricotta makes it extra creamy and flavorful. A must-have for your vegetarian recipes collection.",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2021/06/Crustless-Spinach-Quiche-2.jpg",
-		linkvid: "https://youtu.be/embed/jdUJItIuo3A",
+		linkvid: "https://youtube.com/embed/jdUJItIuo3A",
 		prep: "10 minute",
 		cook: "30 Minute",
 		rat: 5,
@@ -154,7 +176,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "The Most Amazing Vegan Overnight Oats with Vanilla flavor and topped with an out-of-this-world Vegan Chocolate Peanut Butter Banana Smoothie! All the hearts in my eyes!",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2018/01/Vegan-Overnight-Oats-Image.jpg",
-		linkvid: "https://youtu.be/embed/9-N7J22bN3k",
+		linkvid: "https://youtube.com/embed/9-N7J22bN3k",
 		prep: "8 minute",
 		cook: "10 Minute",
 		rat: 5,
@@ -167,7 +189,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "A super easy, quick and delicious baked haddock recipe with herb couscous for those busy weeknights. A filling and highly nutritious meal that you can put together in just 20 minutes!",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2022/03/Baked-Haddock-with-Herb-Couscous.jpg",
-		linkvid: "https://www.youtube.com/embed=J2tag_pk078",
+		linkvid: "https://www.youtube.com/embed/J2tag_pk078",
 		prep: "10 minute",
 		cook: "20 Minute",
 		rat: 5,
@@ -180,7 +202,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "This hearty Beef Vegetable Soup will warm you up from the inside out. Chock full of veggies and lean ground beef, you will absolutely love it!",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2022/01/Beef-Vegetable-Soup-1000x1500.jpg",
-		linkvid: "https://youtu.be/embed/6L5lxKB_ubU",
+		linkvid: "https://youtube.com/embed/6L5lxKB_ubU",
 		prep: "20 minute",
 		cook: "45 Minute",
 		rat: 5,
@@ -193,7 +215,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "This Peruvian Green Rice is hands down the best rice side dish ever! The fresh cilantro not only makes the rice green, but it's also extraordinarily nutritious and delicious.",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2016/09/Peruvian-Green-Rice-1000x1500.jpg",
-		linkvid: "https://youtu.be/embed/MaX6T2nsL1g",
+		linkvid: "https://youtube.com/embed/MaX6T2nsL1g",
 		prep: "5 minute",
 		cook: "20 Minute",
 		rat: 4,
@@ -206,7 +228,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "This Mediterranean Chicken Dinner is bursting with flavor! Juicy chicken thighs with lemon garlic and thyme sauce and a bunch of vegetables. Chicken thighs have never tasted so good!",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2021/06/Mediterranean-Chicken-Dinner_-1000x1500.jpg",
-		linkvid: "https://youtu.be/QyXxsPitCbw",
+		linkvid: "https://youtube.com/embed/QyXxsPitCbw",
 		prep: "15 minute",
 		cook: "50 Minute",
 		rat: 5,
@@ -219,7 +241,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "I struggle to eat enough fruit! This Strawberry Smoothie Without Yogurt makes it easy peasy to dump 2 servings of fruit in one go.",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2017/04/Strawberry-Smoothie-Without-Yogurt-Photo.jpg",
-		linkvid: "https://youtu.be/Rf0PP7j9LtU",
+		linkvid: "https://youtube.com/embed/Rf0PP7j9LtU",
 		prep: "5 minute",
 		cook: "10 Minute",
 		rat: 4,
@@ -232,7 +254,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "Ever wondered how to make Mexican Hot Chocolate? I've got the best Mexican Hot Chocolate Recipe ever for you! Lot's of spices and mixable with ANY kind of milk.",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2015/11/Mexican-Hot-Chocolate-Image.jpg",
-		linkvid: "https://youtu.be/fpgEWNPHF6M",
+		linkvid: "https://youtube.com/embed/fpgEWNPHF6M",
 		prep: "5 minute",
 		cook: "20 Minute",
 		rat: 4,
@@ -245,7 +267,7 @@ const recipe = [
 		koki: "Foodin",
 		ket: "A fail-proof guide for Instant Pot Pot Roast and comparison to slow-cooker version. The easiest pot roast recipe with the best gravy ever! ",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2018/10/Instant-Pot-Pot-Roast-1.jpg",
-		linkvid: "https://youtu.be/5fFDXHKjssw",
+		linkvid: "https://youtube.com/embed/5fFDXHKjssw",
 		prep: "10 minute",
 		cook: "60 Minute",
 		rat: 4,
@@ -258,12 +280,54 @@ const recipe = [
 		koki: "Foodin",
 		ket: "n apple rose tart that will make your loved one drop their chin! It's not only a piece of art but also absolutely delicious. A gluten-free almond crust with sweet apples and coconut maple custard, what else can you want in life?",
 		foto: "https://greenhealthycooking.com/wp-content/uploads/2017/02/Apple-Rose-Tart-1000x1500.jpg",
-		linkvid: "https://youtu.be/cvhbvdNzXns",
+		linkvid: "https://youtube.com/embed/cvhbvdNzXns",
 		prep: "60 minute",
 		cook: "45 Minute",
 		rat: 5,
 		step: 10,
 		gizi: 10,
+	},
+];
+const review = [
+	{
+		id: 1,
+		nama: "anonymous",
+		rat: 5,
+		comment:
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		recipe: 1,
+	},
+	{
+		id: 2,
+		nama: "anonymous",
+		rat: 5,
+		comment:
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		recipe: 3,
+	},
+	{
+		id: 3,
+		nama: "anonymous",
+		rat: 5,
+		comment:
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		recipe: 1,
+	},
+	{
+		id: 4,
+		nama: "anonymous",
+		rat: 5,
+		comment:
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		recipe: 1,
+	},
+	{
+		id: 5,
+		nama: "anonymous",
+		rat: 5,
+		comment:
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+		recipe: 1,
 	},
 ];
 const gizi = [
