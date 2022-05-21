@@ -56,7 +56,7 @@ const GiziType = new GraphQLObjectType({
 
 const CaraType = new GraphQLObjectType({
 	name: "Cara",
-	description: "Mau Lihat Gizi ?",
+	description: "Mau Lihat cara",
 	fields: () => ({
 		id: { type: GraphQLNonNull(GraphQLInt) },
 		step: { type: GraphQLList(GraphQLString) },
