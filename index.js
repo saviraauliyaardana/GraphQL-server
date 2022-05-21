@@ -155,7 +155,7 @@ app.use(
 		graphiql: true,
 	})
 );
-app.listen(3000, () => console.log("Server Running"));
+app.listen(process.env.PORT || 3000, () => console.log("Server Running"));
 // module.exports = app;
 // module.exports.handler = serverless(app);
 
