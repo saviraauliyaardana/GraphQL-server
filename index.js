@@ -1,6 +1,7 @@
 /** @format */
 const express = require("express");
 const expressGraphQL = require("express-graphql");
+const serverless = require("serverless-http");
 var cors = require("cors");
 const {
 	GraphQLSchema,
@@ -154,7 +155,10 @@ app.use(
 		graphiql: true,
 	})
 );
-app.listen(5000, () => console.log("Server Running"));
+// app.listen(5000, () => console.log("Server Running"));
+
+module.exports.handler = serverless(app);
+
 /** @format */
 const recipe = [
 	{
