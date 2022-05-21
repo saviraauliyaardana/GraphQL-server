@@ -155,9 +155,9 @@ app.use(
 		graphiql: true,
 	})
 );
-// app.listen(5000, () => console.log("Server Running"));
-
-module.exports.handler = serverless(app);
+app.listen(5000, () => console.log("Server Running"));
+// module.exports = app;
+// module.exports.handler = serverless(app);
 
 /** @format */
 const recipe = [
